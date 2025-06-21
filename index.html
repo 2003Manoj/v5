@@ -24,12 +24,10 @@
 
         .container {
             text-align: center;
-        
             z-index: 10;
             position: relative;
             max-width: 800px;
             padding: 20px;
-           
         }
 
         .profile-section {
@@ -42,12 +40,10 @@
         }
 
         .profile-image-container {
-            /* margin-top: 100px; */
             margin-left: -100px;
             position: relative;
             width: 300px;
             height: 300px;
-            cursor: pointer;
         }
 
         .profile-image {
@@ -419,24 +415,6 @@
 
         // Add click event to the celebrate button
         celebrateButton.addEventListener('click', goToNextPage);
-
-        // Profile image click handler (allows user to change image)
-        profileImg.addEventListener('click', () => {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        profileImg.src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-            input.click();
-        });
 
         // Create floating hearts around profile image
         function createFloatingHearts() {
