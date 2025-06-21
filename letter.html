@@ -85,7 +85,7 @@
             display: none;
             position: relative;
             width: 100%;
-            max-width: 700px;
+            max-width: 500px;
             margin: 40px auto;
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
             border-radius: 25px;
@@ -262,7 +262,7 @@
         }
 
         /* Video Play Button Override */
-        .video-play-btn {
+        /* .video-play-btn {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -281,7 +281,7 @@
             box-shadow: 0 10px 30px rgba(214, 51, 132, 0.4);
             animation: playButtonPulse 2s ease-in-out infinite;
             transition: all 0.3s ease;
-        }
+        } */
 
         .video-play-btn:hover {
             transform: translate(-50%, -50%) scale(1.1);
@@ -558,7 +558,220 @@
             .floating-element { max-width: 40px; max-height: 40px; }
             .video-container::after { font-size: 0.9rem; padding: 6px 15px; }
         }
-        
+        /* Responsive Design for Modal */
+
+/* Large tablets and small desktops (1024px and below) */
+@media (max-width: 1024px) {
+    .modal {
+        width: 85%;
+        max-width: 550px;
+        padding: 25px;
+    }
+    
+    .modal img {
+        width: 90%;
+        max-width: 450px;
+        height: auto;
+        max-height: 350px;
+        object-fit: cover;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .modal H2 {
+        font-size: 1.6rem;
+    }
+    
+    .modal H5 {
+        font-size: 1rem;
+    }
+}
+
+/* Standard tablets (768px and below) */
+@media (max-width: 768px) {
+    .modal {
+        width: 90%;
+        max-width: 500px;
+        padding: 20px;
+    }
+    
+    .modal img {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .modal H2 {
+        font-size: 1.4rem;
+        margin: 15px 0 10px 0;
+    }
+    
+    .modal H5 {
+        font-size: 0.9rem;
+        margin: 8px 0;
+        line-height: 1.4;
+    }
+    
+    .modal-close {
+        font-size: 20px;
+        top: 10px;
+        right: 10px;
+        padding: 5px;
+    }
+}
+
+/* Mobile phones (480px and below) */
+@media (max-width: 480px) {
+    .modal {
+        width: 95%;
+        max-width: none;
+        padding: 15px;
+        margin: 10px;
+        border-radius: 15px;
+    }
+    
+    .modal img {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        max-height: 220px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    
+    .modal-header {
+        margin-bottom: 15px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+    
+    .modal H2 {
+        font-size: 1.1rem;
+        margin: 10px 0 8px 0;
+    }
+    
+    .modal H5 {
+        font-size: 0.8rem;
+        margin: 6px 0;
+        line-height: 1.3;
+        padding: 0 5px;
+    }
+    
+    .modal-close {
+        font-size: 18px;
+        top: 8px;
+        right: 8px;
+        padding: 3px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.8);
+    }
+    
+    .modal-body {
+        margin-bottom: 20px;
+    }
+}
+
+/* Very small screens (360px and below) */
+@media (max-width: 360px) {
+    .modal {
+        width: 98%;
+        padding: 12px;
+        margin: 5px;
+    }
+    
+    .modal img {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+        max-height: 180px;
+        object-fit: cover;
+    }
+    
+    .modal-header h2 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    
+    .modal H2 {
+        font-size: 1rem;
+        margin: 8px 0 6px 0;
+    }
+    
+    .modal H5 {
+        font-size: 0.75rem;
+        margin: 4px 0;
+        line-height: 1.2;
+    }
+    
+    .modal-close {
+        font-size: 16px;
+        top: 5px;
+        right: 5px;
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .modal {
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 10px;
+    }
+    
+    .modal img {
+        max-height: 150px;
+        width: auto;
+        max-width: 200px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+    
+    .modal H2 {
+        font-size: 0.9rem;
+        margin: 5px 0;
+    }
+    
+    .modal H5 {
+        font-size: 0.7rem;
+        margin: 3px 0;
+    }
+    
+    .modal-body {
+        margin-bottom: 10px;
+    }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .modal img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -583,6 +796,8 @@
         </div>
 
         <div class="video-container" id="video-message">
+            
+
             <!-- Video Decorations -->
             <div class="video-decoration heart-decoration" style="top: -15px; left: 10px;">💖</div>
             <div class="video-decoration heart-decoration" style="top: -10px; right: 15px;">💕</div>
@@ -595,10 +810,18 @@
             </div>
             
             <!-- Replace with your video embed code -->
-            <video id="birthday-video" autoplay loop muted playsinline style="display: none;">
-                <source src="lastvdo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+      <video 
+  id="birthday-video" 
+  autoplay 
+  loop 
+  muted 
+  playsinline 
+  style="position: absolute; top: 3%; left: 10%; width: 80%; height: 95%; object-fit: fill; display: block; z-index: 1;">
+  <source src="lastvdo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+
         </div>
 
         <div class="surprise-button-container">
@@ -661,7 +884,8 @@
             createLoveBubbles();
 
             // Typewriter effect for letter
-            const letterContent = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I hope this year brings a lot of joy and happiness to you🫶💓<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;May god bless you and hope you achive all your dream💫💥<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You are just an amazing beautiful cute girl😚💖<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No words can describe my love and support for you baby😊<br>You don't need any boys to have princess treatment bcz you have me to give you &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a princess treatment😉☺️<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You deserve the whole world🥹<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thank you for loving supporting me in every situation😭💖<br><br>aba dherai english najharam kya😛😆<br>Aayo aayo feri pani meri maya ko janma din aayo Feri pani malai k k ho k k lekhna man layo😁💖<br>Meri maya cute sweet innocent gyani xiu☺️☺️<br>sadai estai hunu meri pyari mayu hunu🫶❤️<br> jindagi maa dherqi dherai pargati garnu💥<br>meri  maya ley socheka sabai kura pura hun💫<br>malai sadai estai gari maya garnu la🥹<br>sadai jindagi maa khushi hunu(masanga aru sanga haina ni feri 😁)<br>kei afthero paro vani sabai vanda paila malai yaad garey hunxa ma sadai sadai timley bolauda bittikai aaihalxu😉☺️<br>malai yeti dherai maya care garni yeti asal life parent banera aayau tesko lagi dherai dherai dhyanabad sanu(Iloveyouuuusooomuchhh)🥺💖<br> timro tarif sabda maa garera sakinna tei vayera aba dherai tarif nagaram 😁😜<br><br>timi mero lagi kati important xiu vanni kura thaha xani hana timlai🤭<br>Timi pizza vaye, ma extra cheese😛<br>Timi charger vaye, ma low battery😛<br><br>Aba 1 barsa budi vayau ta maya😁<br>dherai namotaye hai feri bihey maa uchalna sakdina mailey😜<br>xito xito paisa kamau hai mailey lutni ho timro salary😛<br>gift ko kei aasha nagarey hunxa k chainxa vanda kei vaniniu kerey mai ho timro gift life time varilai😚😏<br>ani important kura.... k lekhni jo meso paina🤣<br> La aba sairi suna🙃<br><br>Purai jindagi maa sangai sangai vayera ramaunu parxa😍😍<br>Mailey ta ghar ko kaam garni ho timley sabai  paisa kamauna parxa🥲😝<br>Dherai nahasa lau yo suna🥺<br><br>J timro tyo mero sabai kura share hunxa😚😚<br>Ladaula risaula kunai din timisanga <br>jati dherai risayeni malai timro sadai care hunxa🥹💖<br>ILOVEYOU MERI MAYU💖💖🥳<br>Jindagi maa dherai ramailo garna xa🥰 sangai sangai dulni ghumni ho😘 full on masti garni ho❤️ tara aba voli chai tei basera ramailo gara malai miss gara ni tya😭paila baru aathey ramailo vathyo ayle ta aauna ni paunna huhu🥺😭 narou dherai sangai bdy manauni din ni aauxa😍😍<br><br>La dherai dherai ramailo gara khushi vau full on enjoy gara maya  its your day🫶💖feri  pani janma dinko dherai dherai suvakaman meri maya lai🫶🎉🎁<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;❤️I❤️L❤️O❤️V❤️E❤️U❤️M❤️A❤️Y❤️U❤️`;
+            const letterContent = 
+             `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I hope this year brings a lot of joy and happiness to you🫶💓<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;May god bless you and hope you achive all your dream💫💥<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You are just an amazing beautiful cute girl😚💖<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No words can describe my love and support for you baby😊<br>You don't need any boys to have princess treatment bcz you have me to give you &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a princess treatment😉☺️<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You deserve the whole world🥹<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thank you for loving supporting me in every situation😭💖<br><br>aba dherai english najharam kya😛😆<br>Aayo aayo feri pani meri maya ko janma din aayo Feri pani malai k k ho k k lekhna man layo😁💖<br>Meri maya cute sweet innocent gyani xiu☺️☺️<br>sadai estai hunu meri pyari mayu hunu🫶❤️<br> jindagi maa dherqi dherai pargati garnu💥<br>meri  maya ley socheka sabai kura pura hun💫<br>malai sadai estai gari maya garnu la🥹<br>sadai jindagi maa khushi hunu(masanga aru sanga haina ni feri 😁)<br>kei afthero paro vani sabai vanda paila malai yaad garey hunxa ma sadai sadai timley bolauda bittikai aaihalxu😉☺️<br>malai yeti dherai maya care garni yeti asal life parent banera aayau tesko lagi dherai dherai dhyanabad sanu(Iloveyouuuusooomuchhh)🥺💖<br> timro tarif sabda maa garera sakinna tei vayera aba dherai tarif nagaram 😁😜<br><br>timi mero lagi kati important xiu vanni kura thaha xani hana timlai🤭<br>Timi pizza vaye, ma extra cheese😛<br>Timi charger vaye, ma low battery😛<br><br>Aba 1 barsa budi vayau ta maya😁<br>dherai namotaye hai feri bihey maa uchalna sakdina mailey😜<br>xito xito paisa kamau hai mailey lutni ho timro salary😛<br>gift ko kei aasha nagarey hunxa k chainxa vanda kei vaniniu kerey mai ho timro gift life time varilai😚😏<br>ani important kura.... k lekhni jo meso paina🤣<br> La aba sairi suna🙃<br><br>Purai jindagi maa sangai sangai vayera ramaunu parxa😍😍<br>Mailey ta ghar ko kaam garni ho timley sabai  paisa kamauna parxa🥲😝<br><br>J timro tyo mero sabai kura share hunxa😚😚<br>Ladaula risaula kunai din timisanga <br>jati dherai risayeni malai timro sadai care hunxa🥹💖<br>ILOVEYOU MERI MAYU💖💖🥳<br>Jindagi maa dherai ramailo garna xa🥰 sangai sangai dulni ghumni ho😘 full on masti garni ho❤️ tara aba voli chai tei basera ramailo gara malai miss gara ni tya😭paila baru aathey ramailo vathyo ayle ta aauna ni paunna huhu🥺😭 narou dherai sangai bdy manauni din ni aauxa😍😍<br><br>La dherai dherai ramailo gara khushi vau full on enjoy gara maya  its your day🫶💖feri  pani janma dinko dherai dherai suvakaman meri maya lai🫶🎉🎁<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;❤️I❤️L❤️O❤️V❤️E❤️U❤️M❤️A❤️Y❤️U❤️`;
         
             new Typed('#typed-text', {
                 strings: [letterContent],
