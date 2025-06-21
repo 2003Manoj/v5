@@ -396,21 +396,72 @@
                 font-size: 0.9em;
             }
         }
+        .profile-image-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+    transition: all 0.3s ease, opacity 0.3s ease;
+    position: relative;
+    z-index: 2;
+    /* Optimize rendering */
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Loading placeholder */
+.profile-image-container::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.profile-image-container.loaded::before {
+    opacity: 0;
+}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="profile-section">
-            <div class="profile-image-container">
-                <div class="glow-ring"></div>
-                <img src="pic.jpg" alt="Birthday Girl" class="profile-image" id="profile-img">
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="floating-hearts" id="floating-hearts"></div>
-            </div>
+           <div class="profile-image-container">
+    <div class="glow-ring"></div>
+    
+    <!-- Optimized image with multiple techniques -->
+    <img src="pic.jpg" 
+         alt="Birthday Girl" 
+         class="profile-image" 
+         id="profile-img"
+         loading="eager"
+         decoding="async"
+         fetchpriority="high"
+         onload="this.style.opacity='1'"
+         style="opacity: 0; transition: opacity 0.3s ease;">
+    
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="floating-hearts" id="floating-hearts"></div>
+</div>
+
             
             <div class="title-section">
                 <h1>💖Happy Birthday💖 <br>Meri Pyari Cutie <br> 💖M💖A💖Y💖A💖 <br>🎉🎂</h1>
@@ -640,6 +691,27 @@
                 });
             }
         }
+        document.addEventListener('DOMContentLoaded', function() {
+    const profileImg = document.getElementById('profile-img');
+    const container = document.querySelector('.profile-image-container');
+    
+    // Preload the image
+    const preloadImg = new Image();
+    preloadImg.onload = function() {
+        profileImg.src = this.src;
+        profileImg.style.opacity = '1';
+        container.classList.add('loaded');
+    };
+    preloadImg.src = 'pic.jpg';
+    
+    // Fallback timeout
+    setTimeout(() => {
+        if (profileImg.style.opacity !== '1') {
+            profileImg.style.opacity = '1';
+            container.classList.add('loaded');
+        }
+    }, 2000);
+});
     </script>
 </body>
 </html>
