@@ -80,24 +80,135 @@
             min-height: 200px;
         }
 
+        /* Enhanced Video Container */
         .video-container {
             display: none;
             position: relative;
             width: 100%;
+            max-width: 700px;
+            margin: 40px auto;
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            margin-bottom: 40px;
-            border-radius: 15px;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(106, 76, 147, 0.3), 0 0 30px rgba(255, 215, 232, 0.5);
+            box-shadow: 
+                0 0 30px rgba(255, 20, 147, 0.6),
+                0 0 60px rgba(138, 43, 226, 0.4),
+                0 15px 35px rgba(106, 76, 147, 0.3);
+            transform: scale(0.9);
+            opacity: 0;
+            animation: videoAppear 2s ease forwards;
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500, #f0932b);
+            background-size: 400% 400%;
+            animation: videoGradient 8s ease infinite, videoAppear 2s ease forwards;
         }
 
-        .video-container iframe {
+        .video-container::before {
+            content: '';
             position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #ff9ff3, #f368e0, #feca57, #ff9ff3);
+            background-size: 300% 300%;
+            animation: borderGlow 4s ease infinite;
+            z-index: -1;
+            filter: blur(10px);
+        }
+
+        .video-container::after {
+            content: '💖 Special Message for You 💖';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            color: #d63384;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+            animation: messageFloat 3s ease-in-out infinite;
+            z-index: 5;
+        }
+
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: calc(100% - 16px);
+            height: calc(100% - 16px);
+            border: none;
+            border-radius: 20px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Video Decorations */
+        .video-decoration {
+            position: absolute;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .heart-decoration {
+            color: #ff6b9d;
+            font-size: 2rem;
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        .star-decoration {
+            color: #feca57;
+            font-size: 1.5rem;
+            animation: starTwinkle 1.5s ease-in-out infinite;
+        }
+
+        /* Falling Hearts and Balloons */
+        .falling-hearts {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .falling-heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 1.5rem;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        .falling-balloon {
+            position: absolute;
+            font-size: 2rem;
+            animation: balloonFloat 8s ease-in-out infinite;
+            opacity: 0.9;
+        }
+
+        /* Love Bubbles */
+        .love-bubble {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 182, 193, 0.7);
+            border-radius: 50%;
+            animation: bubbleRise 4s ease-in infinite;
+            pointer-events: none;
+        }
+
+        .love-bubble::before {
+            content: '💕';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
         }
 
         /* Surprise Button */
@@ -148,6 +259,33 @@
 
         .surprise-button:active {
             transform: translateY(1px);
+        }
+
+        /* Video Play Button Override */
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #d63384;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.4);
+            animation: playButtonPulse 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .video-play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.6);
         }
 
         /* Surprise Modal */
@@ -208,61 +346,6 @@
             cursor: pointer;
         }
 
-        /* Playlist Styling */
-        .playlist {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 20px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .playlist-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(240, 240, 255, 0.7);
-            transition: all 0.2s ease;
-        }
-
-        .playlist-item:hover {
-            background: rgba(225, 225, 255, 0.9);
-            transform: translateX(5px);
-        }
-
-        .playlist-item img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 15px;
-            object-fit: cover;
-        }
-
-        .playlist-item-info {
-            flex-grow: 1;
-            text-align: left;
-        }
-
-        .playlist-item-title {
-            font-weight: bold;
-            color: #6a4c93;
-        }
-
-        .playlist-item-artist {
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        .playlist-item-play {
-            background: none;
-            border: none;
-            color: #6a4c93;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
         /* Back Button */
         .back-button {
             display: inline-block;
@@ -321,51 +404,6 @@
             font-size: 24px;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes gradientBackground {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        @keyframes gradientButton {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-            100% {
-                transform: translateY(-20px) rotate(5deg);
-            }
-        }
-
         /* Cursor Effect */
         .cursor-effect {
             position: absolute;
@@ -380,41 +418,164 @@
             opacity: 0;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-
-            .container {
-                padding: 15px;
-            }
-
-            .letter-container {
-                padding: 20px;
-            }
-
-            .letter {
-                font-size: 1rem;
-            }
-
-            .surprise-button {
-                font-size: 1.2rem;
-                padding: 12px 30px;
-            }
-
-            .floating-element {
-                max-width: 40px;
-                max-height: 40px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes gradientButton {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes videoAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotateY(180deg);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.1) rotateY(90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+
+        @keyframes videoGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { 
+                background-position: 0% 50%;
+                filter: blur(10px) brightness(1);
+            }
+            50% { 
+                background-position: 100% 50%;
+                filter: blur(15px) brightness(1.2);
+            }
+        }
+
+        @keyframes messageFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.5; transform: rotate(0deg) scale(1); }
+            50% { opacity: 1; transform: rotate(180deg) scale(1.2); }
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes balloonFloat {
+            0% {
+                transform: translateY(100vh) rotate(-5deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(5deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bubbleRise {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(80vh) scale(1);
+            }
+            100% {
+                transform: translateY(-20vh) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes playButtonPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 10px 30px rgba(214, 51, 132, 0.4);
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.1);
+                box-shadow: 0 15px 40px rgba(214, 51, 132, 0.6);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 15px; }
+            .letter-container { padding: 20px; }
+            .letter { font-size: 1rem; }
+            .surprise-button { font-size: 1.2rem; padding: 12px 30px; }
+            .floating-element { max-width: 40px; max-height: 40px; }
+            .video-container::after { font-size: 0.9rem; padding: 6px 15px; }
+        }
+        
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <audio id="birthday-song" loop autoplay>
+        <source src="hbd.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Falling Hearts and Balloons -->
+    <div class="falling-hearts" id="falling-hearts"></div>
+
     <div class="container">
         <header>
-            <h1>For My Dearest Friend ❤️</h1>
+            <h1>❤️H❤️A❤️P❤️P❤️Y❤️</h1>
+            <h1>❤️B❤️I❤️R❤️T❤️H❤️D❤️A❤️Y❤️</h1>
+            <h1>❤️M❤️A❤️Y❤️A❤️</h1>
         </header>
 
         <div class="letter-container">
@@ -422,8 +583,22 @@
         </div>
 
         <div class="video-container" id="video-message">
+            <!-- Video Decorations -->
+            <div class="video-decoration heart-decoration" style="top: -15px; left: 10px;">💖</div>
+            <div class="video-decoration heart-decoration" style="top: -10px; right: 15px;">💕</div>
+            <div class="video-decoration star-decoration" style="bottom: -15px; left: 20px;">⭐</div>
+            <div class="video-decoration star-decoration" style="bottom: -10px; right: 25px;">✨</div>
+            
+            <!-- Custom Play Button -->
+            <div class="video-play-btn" id="custom-play-btn">
+                <i class="fas fa-play"></i>
+            </div>
+            
             <!-- Replace with your video embed code -->
-            <iframe src="about:blank" frameborder="0" allowfullscreen></iframe>
+            <video id="birthday-video" autoplay loop muted playsinline style="display: none;">
+                <source src="lastvdo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
 
         <div class="surprise-button-container">
@@ -443,59 +618,17 @@
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
             <button class="modal-close" id="modal-close">×</button>
+            
             <div class="modal-header">
-                <h2>🎉 Your Special Surprise! 🎉</h2>
+                <h2>❤️HAPPY❤️BIRTHDAY❤️</h2>
             </div>
-            <div class="modal-body">
-                <div class="playlist">
-                    <h3 style="margin-bottom: 15px;">Songs That Remind Me of Us 💕</h3>
-                    <div class="playlist-item">
-                        <img src="3.jpg" alt="Song cover">
-                        <div class="playlist-item-info">
-                            <div class="playlist-item-title">Our Favorite Memory</div>
-                            <div class="playlist-item-artist">That Artist You Love</div>
-                        </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="1.jpg" alt="Song cover">
-                        <div class="playlist-item-info">
-                            <div class="playlist-item-title">That Summer Night</div>
-                            <div class="playlist-item-artist">The Adventure Band</div>
-                        </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="6.jpg" alt="Song cover">
-                        <div class="playlist-item-info">
-                            <div class="playlist-item-title">Inside Joke Anthem</div>
-                            <div class="playlist-item-artist">Laugh Out Loud</div>
-                        </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="2.jpeg" alt="Song cover">
-                        <div class="playlist-item-info">
-                            <div class="playlist-item-title">Remember When</div>
-                            <div class="playlist-item-artist">The Friendship Vibes</div>
-                        </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="5.jpg" alt="Song cover">
-                        <div class="playlist-item-info">
-                            <div class="playlist-item-title">Birthday Wishes</div>
-                            <div class="playlist-item-artist">Happy Songs</div>
-                        </div>
-                        <button class="playlist-item-play"><i class="fas fa-play"></i></button>
-                    </div>
-                </div>
-                <div style="margin-top: 20px;">
-                    <a href="#" download class="back-button" style="background: #ffb6c1; border-color: #ffb6c1; color: white;">
-                        <i class="fas fa-download"></i> Download Your Digital Gift
-                    </a>
-                </div>
-            </div>
+            <img src="lastim.jpg" alt="your last surprise" style="width: 500px; height: 400px;">
+            
+        </img>
+        <H2>❤️MAYA❤️</H2>
+          
+        <H5>🥺I missed you so much,Sanu🥺</H5>
+        <H5>❤️L❤️O❤️V❤️E❤️U❤️M❤️A❤️Y❤️A❤️L❤️U❤️</H5>
         </div>
     </div>
 
@@ -522,18 +655,29 @@
                 document.querySelector('.container').style.opacity = 1;
             }, 500);
 
+            // Start falling hearts and balloons immediately
+            startFallingHearts();
+            startFloatingBalloons();
+            createLoveBubbles();
+
             // Typewriter effect for letter
-            const letterContent = "My dearest friend,\n\nAs I sit here thinking about all our memories together, I can't help but smile. From our late-night talks to our spontaneous adventures, you've filled my life with so much joy and laughter. You've been my shoulder to cry on, my partner in crime, and my biggest supporter.\n\nOn your special day, I want you to know how grateful I am to have you in my life. You make every day brighter just by being you - kind, funny, and incredibly thoughtful.\n\nHappy Birthday to my favorite person in the world! Here's to many more years of friendship, laughter, and creating memories together.\n\nWith all my love,\n[Your Name]";
-            
+            const letterContent = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I hope this year brings a lot of joy and happiness to you🫶💓<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;May god bless you and hope you achive all your dream💫💥<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You are just an amazing beautiful cute girl😚💖<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No words can describe my love and support for you baby😊<br>You don't need any boys to have princess treatment bcz you have me to give you &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a princess treatment😉☺️<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You deserve the whole world🥹<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thank you for loving supporting me in every situation😭💖<br><br>aba dherai english najharam kya😛😆<br>Aayo aayo feri pani meri maya ko janma din aayo Feri pani malai k k ho k k lekhna man layo😁💖<br>Meri maya cute sweet innocent gyani xiu☺️☺️<br>sadai estai hunu meri pyari mayu hunu🫶❤️<br> jindagi maa dherqi dherai pargati garnu💥<br>meri  maya ley socheka sabai kura pura hun💫<br>malai sadai estai gari maya garnu la🥹<br>sadai jindagi maa khushi hunu(masanga aru sanga haina ni feri 😁)<br>kei afthero paro vani sabai vanda paila malai yaad garey hunxa ma sadai sadai timley bolauda bittikai aaihalxu😉☺️<br>malai yeti dherai maya care garni yeti asal life parent banera aayau tesko lagi dherai dherai dhyanabad sanu(Iloveyouuuusooomuchhh)🥺💖<br> timro tarif sabda maa garera sakinna tei vayera aba dherai tarif nagaram 😁😜<br><br>timi mero lagi kati important xiu vanni kura thaha xani hana timlai🤭<br>Timi pizza vaye, ma extra cheese😛<br>Timi charger vaye, ma low battery😛<br><br>Aba 1 barsa budi vayau ta maya😁<br>dherai namotaye hai feri bihey maa uchalna sakdina mailey😜<br>xito xito paisa kamau hai mailey lutni ho timro salary😛<br>gift ko kei aasha nagarey hunxa k chainxa vanda kei vaniniu kerey mai ho timro gift life time varilai😚😏<br>ani important kura.... k lekhni jo meso paina🤣<br> La aba sairi suna🙃<br><br>Purai jindagi maa sangai sangai vayera ramaunu parxa😍😍<br>Mailey ta ghar ko kaam garni ho timley sabai  paisa kamauna parxa🥲😝<br>Dherai nahasa lau yo suna🥺<br><br>J timro tyo mero sabai kura share hunxa😚😚<br>Ladaula risaula kunai din timisanga <br>jati dherai risayeni malai timro sadai care hunxa🥹💖<br>ILOVEYOU MERI MAYU💖💖🥳<br>Jindagi maa dherai ramailo garna xa🥰 sangai sangai dulni ghumni ho😘 full on masti garni ho❤️ tara aba voli chai tei basera ramailo gara malai miss gara ni tya😭paila baru aathey ramailo vathyo ayle ta aauna ni paunna huhu🥺😭 narou dherai sangai bdy manauni din ni aauxa😍😍<br><br>La dherai dherai ramailo gara khushi vau full on enjoy gara maya  its your day🫶💖feri  pani janma dinko dherai dherai suvakaman meri maya lai🫶🎉🎁<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;❤️I❤️L❤️O❤️V❤️E❤️U❤️M❤️A❤️Y❤️U❤️`;
+        
             new Typed('#typed-text', {
                 strings: [letterContent],
                 typeSpeed: 30,
                 showCursor: true,
                 cursorChar: '|',
                 onComplete: function() {
+                    // Show video with magical entrance after letter is complete
+                    setTimeout(() => {
+                        document.getElementById('video-message').style.display = 'block';
+                        createSpecialEffects();
+                    }, 2000);
+                    
                     setTimeout(() => {
                         document.querySelector('.surprise-button').classList.add('animate__animated', 'animate__pulse', 'animate__infinite');
-                    }, 1000);
+                    }, 4000);
                 }
             });
 
@@ -553,6 +697,27 @@
 
             floatingElements.forEach((element, index) => {
                 createFloatingElement(element, index);
+            });
+
+            // Custom video play button
+            const customPlayBtn = document.getElementById('custom-play-btn');
+            const birthdayVideo = document.getElementById('birthday-video');
+
+            customPlayBtn.addEventListener('click', function() {
+                customPlayBtn.style.display = 'none';
+                birthdayVideo.style.display = 'block';
+                birthdayVideo.play();
+                
+                // Trigger confetti when video starts
+                confetti({
+                    particleCount: 150,
+                    spread: 100,
+                    origin: { y: 0.6 },
+                    colors: ['#ff6b9d', '#c44569', '#f8b500', '#ff9ff3']
+                });
+                
+                // Create explosion of hearts
+                createHeartExplosion();
             });
 
             // Cursor effect
@@ -648,6 +813,155 @@
                         }, 500);
                     }, 300);
                 }, 10);
+            }
+
+            function startFallingHearts() {
+                const heartsContainer = document.getElementById('falling-hearts');
+                const heartEmojis = ['💖', '💕', '💗', '💝', '💓', '💘', '💞', '💟', '❤️', '🧡', '💛', '💚', '💙', '💜', '🤍', '🖤', '🤎'];
+                
+                function createFallingHeart() {
+                    const heart = document.createElement('div');
+                    heart.classList.add('falling-heart');
+                    heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+                }
+                
+                // Create hearts continuously
+                setInterval(createFallingHeart, 300);
+            }
+
+            function startFloatingBalloons() {
+                const heartsContainer = document.getElementById('falling-hearts');
+                const balloonEmojis = ['🎈', '🎀', '🌸', '🌺', '🌼', '🌻', '🌷', '🌹', '💐', '🦋'];
+                
+                function createFloatingBalloon() {
+                    const balloon = document.createElement('div');
+                    balloon.classList.add('falling-balloon');
+                    balloon.textContent = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
+                    balloon.style.left = Math.random() * 100 + '%';
+                    balloon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                    balloon.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
+                    heartsContainer.appendChild(balloon);
+                    
+                    setTimeout(() => {
+                        balloon.remove();
+                    }, 10000);
+                }
+                
+                // Create balloons less frequently
+                setInterval(createFloatingBalloon, 800);
+            }
+
+            function createLoveBubbles() {
+                const container = document.body;
+                
+                function createBubble() {
+                    const bubble = document.createElement('div');
+                    bubble.classList.add('love-bubble');
+                    bubble.style.left = Math.random() * 100 + '%';
+                    bubble.style.bottom = '-50px';
+                    bubble.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    bubble.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(bubble);
+                    
+                    setTimeout(() => {
+                        bubble.remove();
+                    }, 6000);
+                }
+                
+                // Create bubbles periodically
+                setInterval(createBubble, 1000);
+            }
+
+            function createSpecialEffects() {
+                // Create magical sparkles around video
+                const videoContainer = document.getElementById('video-message');
+                const sparkleCount = 20;
+                
+                for (let i = 0; i < sparkleCount; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.innerHTML = '✨';
+                        sparkle.style.position = 'absolute';
+                        sparkle.style.fontSize = '1.5rem';
+                        sparkle.style.pointerEvents = 'none';
+                        sparkle.style.zIndex = '15';
+                        sparkle.style.left = Math.random() * 100 + '%';
+                        sparkle.style.top = Math.random() * 100 + '%';
+                        sparkle.style.animation = 'starTwinkle 2s ease-in-out infinite';
+                        videoContainer.appendChild(sparkle);
+                        
+                        setTimeout(() => {
+                            sparkle.remove();
+                        }, 4000);
+                    }, i * 200);
+                }
+                
+                // Trigger confetti explosion
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 200,
+                        spread: 120,
+                        origin: { y: 0.5 },
+                        colors: ['#ff6b9d', '#c44569', '#f8b500', '#ff9ff3', '#feca57']
+                    });
+                }, 1000);
+            }
+
+            function createHeartExplosion() {
+                const heartsContainer = document.getElementById('falling-hearts');
+                const heartCount = 30;
+                
+                for (let i = 0; i < heartCount; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.textContent = '💖';
+                        heart.style.position = 'absolute';
+                        heart.style.fontSize = '2rem';
+                        heart.style.left = '50%';
+                        heart.style.top = '50%';
+                        heart.style.transform = 'translate(-50%, -50%)';
+                        heart.style.pointerEvents = 'none';
+                        heart.style.zIndex = '20';
+                        heart.style.color = ['#ff6b9d', '#c44569', '#f8b500', '#ff9ff3'][Math.floor(Math.random() * 4)];
+                        
+                        const angle = (360 / heartCount) * i;
+                        const distance = 200 + Math.random() * 100;
+                        const endX = Math.cos(angle * Math.PI / 180) * distance;
+                        const endY = Math.sin(angle * Math.PI / 180) * distance;
+                        
+                        heart.style.animation = `
+                            heartExplosion 2s ease-out forwards
+                        `;
+                        
+                        heart.animate([
+                            { 
+                                transform: 'translate(-50%, -50%) scale(1)',
+                                opacity: 1
+                            },
+                            { 
+                                transform: `translate(calc(-50% + ${endX}px), calc(-50% + ${endY}px)) scale(0.5)`,
+                                opacity: 0
+                            }
+                        ], {
+                            duration: 2000,
+                            easing: 'ease-out'
+                        });
+                        
+                        heartsContainer.appendChild(heart);
+                        
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 2000);
+                    }, i * 50);
+                }
             }
         });
     </script>

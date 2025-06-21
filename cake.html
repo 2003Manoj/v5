@@ -268,7 +268,7 @@
         z-index: 100;
         opacity: 0;
         width: 90%;
-        max-width: 400px;
+        max-width: 500px;
         transition: all 0.5s ease;
         border: 3px solid rgba(255, 255, 255, 0.7);
       }
@@ -501,6 +501,187 @@
           font-size: 13px;
         }
       }
+       @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 50px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Fredoka One', cursive;
+            overflow: hidden;
+        }
+        
+        #cake-heading {
+            font-size: 3.5rem;
+            font-weight: 400;
+            text-align: center;
+            color: #ff6b9d;
+            text-shadow: 3px 3px 0px #fff, 6px 6px 0px rgba(255, 107, 157, 0.3);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            padding: 20px 40px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            overflow: visible;
+        }
+        
+        #cake-heading::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b9d, #4ecdc4, #45b7d1, #96ceb4, #fef65b, #ff6b9d);
+            background-size: 300% 300%;
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0;
+            animation: gradientShift 3s ease infinite;
+            transition: opacity 0.3s ease;
+        }
+        
+        #cake-heading:hover::before {
+            opacity: 1;
+        }
+        
+        #cake-heading::after {
+            content: '🎂✨🎉';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            font-size: 2rem;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+        }
+        
+        #cake-heading:hover::after {
+            transform: translateX(-50%) scale(1) rotate(360deg);
+            opacity: 1;
+            top: -40px;
+        }
+        
+        #cake-heading:hover {
+            transform: translateY(-10px) scale(1.05);
+            color: #fff;
+            text-shadow: 3px 3px 0px #ff6b9d, 6px 6px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(255, 107, 157, 0.4),
+                        0 0 0 10px rgba(255, 255, 255, 0.1),
+                        0 0 0 20px rgba(255, 107, 157, 0.1);
+        }
+        
+        /* Sparkle animation */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fef65b;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+        
+        .sparkle:nth-child(1) { top: 20%; left: 10%; animation: sparkle 2s infinite 0.1s; }
+        .sparkle:nth-child(2) { top: 40%; left: 90%; animation: sparkle 2s infinite 0.4s; }
+        .sparkle:nth-child(3) { top: 60%; left: 20%; animation: sparkle 2s infinite 0.7s; }
+        .sparkle:nth-child(4) { top: 80%; left: 80%; animation: sparkle 2s infinite 1s; }
+        .sparkle:nth-child(5) { top: 10%; left: 60%; animation: sparkle 2s infinite 1.3s; }
+        .sparkle:nth-child(6) { top: 90%; left: 40%; animation: sparkle 2s infinite 1.6s; }
+        
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0) rotate(0deg);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1) rotate(180deg);
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Floating hearts */
+        .heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 1.5rem;
+            pointer-events: none;
+            opacity: 0;
+            animation: floatHeart 3s infinite ease-in-out;
+        }
+        
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 30%; animation-delay: 0.5s; }
+        .heart:nth-child(3) { left: 50%; animation-delay: 1s; }
+        .heart:nth-child(4) { left: 70%; animation-delay: 1.5s; }
+        .heart:nth-child(5) { left: 90%; animation-delay: 2s; }
+        
+        @keyframes floatHeart {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            80% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0);
+            }
+        }
+        
+        /* Continuous celebration background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 177, 153, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 107, 157, 0.2) 0%, transparent 50%);
+            animation: float 20s infinite linear;
+            z-index: -2;
+        }
+        
+        @keyframes float {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            #cake-heading {
+                font-size: 2.5rem;
+                padding: 15px 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #cake-heading {
+                font-size: 2rem;
+                padding: 10px 20px;
+            }
+        }
     </style>
     <link
       rel="stylesheet"
@@ -528,11 +709,17 @@
     </style>
   </head>
   <body
+  
     __processed_7adb44bb-c731-4b39-a819-dea3d74cf4d5__="true"
     bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJMSU5LRURJTiI6ImRpc2FibGVkIiwiQ09ORklHIjoiZGlzYWJsZWQifSwidmVyc2lvbiI6IjIuMC4yMiIsInNjb3JlIjoyMDAyMn1d"
     data-new-gr-c-s-check-loaded="14.1235.0"
     data-gr-ext-installed=""
-  >
+    
+  ><audio id="birthday-song" loop autoplay>
+        <source src="hbd.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <div><h1 id="cake-heading">"Let's cut the cake and celebrate!</h1></div>
     <!-- Balloons and Confetti will be added by JavaScript -->
 
     <!-- Birthday Cake -->
@@ -659,8 +846,8 @@
 
     <!-- Enhanced Wish Message Popup -->
     <div class="wish-message" id="wishMessage" bis_skin_checked="1">
-      <h2>✨ Happy Birthday! ✨</h2>
-      <p>Make a wish, Bestie! May all your dreams come true! 🎂✨</p>
+      <h2>✨ Happy Birthday BABY ✨</h2>
+      <p>May all your dreams come true! 🎂✨</p>
       <button class="btn" onclick="closeWishMessage()">Thank you! ❤️</button>
     </div>
 
