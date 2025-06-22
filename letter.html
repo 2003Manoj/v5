@@ -32,6 +32,7 @@
             transform: translateY(20px);
             animation: fadeIn 3s forwards 0.5s;
         }
+        
 
         /* Header Styles */
         header {
@@ -82,12 +83,13 @@
 
         /* Enhanced Video Container */
         .video-container {
-            display: none;
-            position: relative;
-            width: 100%;
-            max-width: 500px;
+            display: block;
+            position: absolute;
+          width: 800px;
+            height: 700px;
+           
             margin: 40px auto;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            /* padding-top: 10.25%;  */
             border-radius: 25px;
             overflow: hidden;
             box-shadow: 
@@ -261,27 +263,7 @@
             transform: translateY(1px);
         }
 
-        /* Video Play Button Override */
-        /* .video-play-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: #d63384;
-            cursor: pointer;
-            z-index: 10;
-            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.4);
-            animation: playButtonPulse 2s ease-in-out infinite;
-            transition: all 0.3s ease;
-        } */
+      
 
         .video-play-btn:hover {
             transform: translate(-50%, -50%) scale(1.1);
@@ -777,7 +759,8 @@
     display: none;
     position: relative;
     width: 100%;
-    max-width: 500px;
+    max-width: 700px;
+    height: 650px;
     margin: 40px auto;
     padding-top: 56.25%; /* 16:9 Aspect Ratio */
     border-radius: 25px;
@@ -985,6 +968,39 @@ video {
         </header>
 
         <div class="letter-container">
+            <!-- <video 
+            autoplay 
+            muted 
+            loop 
+            style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 100000;
+                z-index: -0.5;
+            "
+        >
+        
+            <source src="lastvdo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> -->
+         <!-- <img 
+            src="pic.JPG"
+            alt="Background" 
+            style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 10000;
+                z-index: -1;
+            "
+        /> -->
             <div class="letter" id="typed-text"></div>
         </div>
 
@@ -997,23 +1013,25 @@ video {
             <div class="video-decoration star-decoration" style="bottom: -15px; left: 20px;">⭐</div>
             <div class="video-decoration star-decoration" style="bottom: -10px; right: 25px;">✨</div>
             
-            <!-- Custom Play Button -->
-            <div class="video-play-btn" id="custom-play-btn">
-                <i class="fas fa-play"></i>
-            </div>
-            
-            <!-- Replace with your video embed code -->
-      <video 
-  id="birthday-video" 
-  autoplay 
-  loop 
-  muted 
-  playsinline 
-  style="position: absolute; top: 3%; left: 10%; width: 80%; height: 95%; object-fit: fill; display: block; z-index: 1;">
-  <source src="lastvdo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
+<video 
+            autoplay 
+            muted 
+            loop 
+            style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 100000;
+                z-index: 1;
+            "
+        >
+        
+            <source src="lastvdo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
         </div>
 
@@ -1077,12 +1095,58 @@ video {
             createLoveBubbles();
 
             // Typewriter effect for letter
-            const letterContent = 
-             `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I hope this year brings a lot of joy and happiness to you🫶💓<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;May god bless you and hope you achive all your dream💫💥<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You are just an amazing beautiful cute girl😚💖<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No words can describe my love and support for you baby😊<br>You don't need any boys to have princess treatment bcz you have me to give you &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a princess treatment😉☺️<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You deserve the whole world🥹<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thank you for loving supporting me in every situation😭💖<br><br>aba dherai english najharam kya😛😆<br>Aayo aayo feri pani meri maya ko janma din aayo Feri pani malai k k ho k k lekhna man layo😁💖<br>Meri maya cute sweet innocent gyani xiu☺️☺️<br>sadai estai hunu meri pyari mayu hunu🫶❤️<br> jindagi maa dherqi dherai pargati garnu💥<br>meri  maya ley socheka sabai kura pura hun💫<br>malai sadai estai gari maya garnu la🥹<br>sadai jindagi maa khushi hunu(masanga aru sanga haina ni feri 😁)<br>kei afthero paro vani sabai vanda paila malai yaad garey hunxa ma sadai sadai timley bolauda bittikai aaihalxu😉☺️<br>malai yeti dherai maya care garni yeti asal life parent banera aayau tesko lagi dherai dherai dhyanabad sanu(Iloveyouuuusooomuchhh)🥺💖<br> timro tarif sabda maa garera sakinna tei vayera aba dherai tarif nagaram 😁😜<br><br>timi mero lagi kati important xiu vanni kura thaha xani hana timlai🤭<br>Timi pizza vaye, ma extra cheese😛<br>Timi charger vaye, ma low battery😛<br><br>Aba 1 barsa budi vayau ta maya😁<br>dherai namotaye hai feri bihey maa uchalna sakdina mailey😜<br>xito xito paisa kamau hai mailey lutni ho timro salary😛<br>gift ko kei aasha nagarey hunxa k chainxa vanda kei vaniniu kerey mai ho timro gift life time varilai😚😏<br>ani important kura.... k lekhni jo meso paina🤣<br> La aba sairi suna🙃<br><br>Purai jindagi maa sangai sangai vayera ramaunu parxa😍😍<br>Mailey ta ghar ko kaam garni ho timley sabai  paisa kamauna parxa🥲😝<br><br>J timro tyo mero sabai kura share hunxa😚😚<br>Ladaula risaula kunai din timisanga <br>jati dherai risayeni malai timro sadai care hunxa🥹💖<br>ILOVEYOU MERI MAYU💖💖🥳<br>Jindagi maa dherai ramailo garna xa🥰 sangai sangai dulni ghumni ho😘 full on masti garni ho❤️ tara aba voli chai tei basera ramailo gara malai miss gara ni tya😭paila baru aathey ramailo vathyo ayle ta aauna ni paunna huhu🥺😭 narou dherai sangai bdy manauni din ni aauxa😍😍<br><br>La dherai dherai ramailo gara khushi vau full on enjoy gara maya  its your day🫶💖feri  pani janma dinko dherai dherai suvakaman meri maya lai🫶🎉🎁<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;❤️I❤️L❤️O❤️V❤️E❤️U❤️M❤️A❤️Y❤️U❤️`;
+            
+            const letterContent = `<div style="max-width: 800px; margin: 0 auto; padding: 20px; text-align: center; line-height: 1.6;">
+
+<span style="display: block; text-align: center; font-size: 2em; margin-bottom: 20px; color: #ff1493;">💕 Happy Birthday My Love 💕</span>
+<p style="color:#ff1493; font-size:18px; text-align: center; margin: 15px 0; line-height: 1.5;">I hope this year brings a lot of joy and happiness to you🫶💓</p>
+<p style="color:#ff1493; font-size:18px; text-align: center; margin: 15px 0; line-height: 1.5;">May god bless you and hope you achive all your dream💫💥</p>
+<p style="color:#ff1493; font-size:17px; font-style:italic; text-align: center; margin: 15px 0; line-height: 1.5;">You are just an amazing beautiful cute girl😚💖(meri baby)</p>
+<p style="color:#ff1493; font-size:17px; font-style:italic; text-align: center; margin: 15px 0; line-height: 1.5;">No words can describe my love and support for you baby😊</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">You don't need any boys to have princess treatment bcz you have me to give you a princess treatment😉☺️</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">You deserve the whole world🥹</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">thank you baby for loving supporting me in every situation 😭💖</p>
+<br>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">aba dherai english najharam kya😛😆</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">Meri maya cute sweet innocent gyani xiu☺️☺️</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">sadai estai hunu meri pyari mayu hunu🫶❤️</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">jindagi maa dherqi dherai pargati garnu💥</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">meri maya ley socheka chaheka sabai kura pura hun💫</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">timley chaleka harek paila maa success milos sanu💫💕</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">sadai jindagi maa khushi hunu(masanga aru sanga haina ni feri 😁)</p>
+<p style="color:#ff1493; font-size:16px; font-style:italic; text-align: center; margin: 15px 0; line-height: 1.5;">timro harek dukha sukhama timro xaya banera hidna paam maya🥺☺️</p>
+<p style="color:#ff1493; font-size:16px; font-style:italic; text-align: center; margin: 15px 0; line-height: 1.5;">malai yeti dherai maya care garni yeti asal meri pyari manxey banera aayau tesko lagi dherai dherai dhyanabad sanu(Iloveyouuuusooomuchhh)🥺💖</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">malai sadai estai gari maya garnu la sanu🥹</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">timi aru vanda dherai alag xiu, meheneti xiu, sabai ki pyari xiu, innocent xiu,cute xiu, sweet xiu, and most important mero lagi perfect xiu🥺💓</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">timro tarif sabda maa bayaan garera sakinna maya tei vayera aba dherai tarif nagaram 😁😜</p>
+<br>
+
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">Aba 1 barsa budi vayau ta maya😁</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">dherai namotaye hai feri bihey maa uchalna sakdina mailey😜</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">xito xito paisa kamau hai mailey lutni ho timro salary😛</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">gift ko kei aasha nagarey hunxa k chainxa vanda kei vaniniu kerey mai ho timro gift life time varilai😚😏</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">ani important kura.... k lekhni jo meso paina🤣</p>
+
+<br>
+<p style="color:#ff1493; font-size:17px; text-align: center; margin: 15px 0; line-height: 1.5;">Purai jindagi maa sangai sangai vayera ramaunu parxa😍😍</p>
+<p style="color:#ff1493; font-size:17px; text-align: center; margin: 15px 0; line-height: 1.5;">Mailey ta ghar ko kaam garni ho timley sabai paisa kamauna parxa🥲😝</p>
+<br>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">J timro tyo mero sabai kura share hunxa😚😚</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">Ladaula risaula kunai din timisanga</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">jati dherai risayeni malai timro sadai care hunxa🥹💖</p>
+<p style="color:#ff1493; font-size:20px; font-weight:bold; text-align:center; margin:20px 0; line-height: 1.5;">ILOVEYOU MERI PUNTU💖💖🥳</p>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">Jindagi maa dherai ramailo garna xa🥰 sangai sangai dulni ghumni ho😘 full on ramailo garni ho❤️ tara aba voli chai tei basera ramailo gara🥰 malai miss gara ni tya😭</p>
+<br>
+<p style="color:#ff1493; font-size:16px; text-align: center; margin: 15px 0; line-height: 1.5;">voli ko din dherai nammo nammo photo khicha ani malai pathau la sanu💓💓dherai dherai khushi vau voli matra haina sadai vari smile matra dekhna paiyos timro face maa puntu🥰💓</p>
+
+<p style="color:#ff1493; font-size:17px; text-align: center; margin: 15px 0; line-height: 1.5;">feri pani janma dinko dherai dherai dherai suvakaman meri pyari maya lai🫶🎉🎁</p>
+<br>
+<p style="color:#ff1493; font-size:24px; font-weight:bold; text-align:center; letter-spacing:2px; margin: 20px 0; line-height: 1.5;">❤️I❤️L❤️O❤️V❤️E❤️U❤️M❤️A❤️Y❤️A❤️</p>
+</div>`;
         
             new Typed('#typed-text', {
                 strings: [letterContent],
-                typeSpeed: 30,
+                typeSpeed: 40,
                 showCursor: true,
                 cursorChar: '|',
                 onComplete: function() {
