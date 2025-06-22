@@ -83,13 +83,12 @@
 
         /* Enhanced Video Container */
         .video-container {
-            display: block;
-            position: absolute;
-          width: 800px;
-            height: 700px;
-           
+            display: none;
+            position: relative;
+            width: 100%;
+            max-width: 500px;
             margin: 40px auto;
-            /* padding-top: 10.25%;  */
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
             border-radius: 25px;
             overflow: hidden;
             box-shadow: 
@@ -760,7 +759,7 @@
     position: relative;
     width: 100%;
     max-width: 700px;
-    height: 650px;
+    height: 700px;
     margin: 40px auto;
     padding-top: 56.25%; /* 16:9 Aspect Ratio */
     border-radius: 25px;
@@ -1013,7 +1012,24 @@ video {
             <div class="video-decoration star-decoration" style="bottom: -15px; left: 20px;">⭐</div>
             <div class="video-decoration star-decoration" style="bottom: -10px; right: 25px;">✨</div>
             
-<video 
+            <!-- Custom Play Button -->
+            <div class="video-play-btn" id="custom-play-btn">
+                <i class="fas fa-play"></i>
+            </div>
+            
+            <!-- Replace with your video embed code -->
+      <!-- <video 
+  id="birthday-video" 
+  autoplay 
+  loop 
+  muted 
+  playsinline 
+  style="position: absolute; top: 3%; left: 10%; width: 80%; height: 95%; object-fit: fill; display: block; z-index: 1;">
+  <source src="lastvdo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> -->
+
+ <video 
             autoplay 
             muted 
             loop 
@@ -1025,14 +1041,13 @@ video {
                 height: 100%;
                 object-fit: cover;
                 opacity: 100000;
-                z-index: 1;
+                z-index: -0.5;
             "
         >
         
             <source src="lastvdo.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-
         </div>
 
         <div class="surprise-button-container">
@@ -1095,9 +1110,7 @@ video {
             createLoveBubbles();
 
             // Typewriter effect for letter
-            
             const letterContent = `<div style="max-width: 800px; margin: 0 auto; padding: 20px; text-align: center; line-height: 1.6;">
-
 <span style="display: block; text-align: center; font-size: 2em; margin-bottom: 20px; color: #ff1493;">💕 Happy Birthday My Love 💕</span>
 <p style="color:#ff1493; font-size:18px; text-align: center; margin: 15px 0; line-height: 1.5;">I hope this year brings a lot of joy and happiness to you🫶💓</p>
 <p style="color:#ff1493; font-size:18px; text-align: center; margin: 15px 0; line-height: 1.5;">May god bless you and hope you achive all your dream💫💥</p>
@@ -1146,7 +1159,7 @@ video {
         
             new Typed('#typed-text', {
                 strings: [letterContent],
-                typeSpeed: 40,
+                typeSpeed: 35,
                 showCursor: true,
                 cursorChar: '|',
                 onComplete: function() {
