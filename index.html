@@ -53,9 +53,11 @@
             object-fit: cover;
             border: 5px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, opacity 0.3s ease;
             position: relative;
             z-index: 2;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .profile-image:hover {
@@ -133,7 +135,7 @@
             background: conic-gradient(from 0deg, #ff1493, #8a2be2, #ffd700, #ff4500, #00bfff, #32cd32, #ff1493);
             z-index: 1;
             animation: rotate-glow 4s linear infinite;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.3s ease;
         }
 
@@ -401,46 +403,27 @@
                 font-size: 0.9em;
             }
         }
-        .profile-image-container {
-    position: relative;
-    width: 300px;
-    height: 300px;
-}
 
-.profile-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 5px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
-    transition: all 0.3s ease, opacity 0.3s ease;
-    position: relative;
-    z-index: 2;
-    /* Optimize rendering */
-    will-change: transform;
-    transform: translateZ(0);
-}
+        /* Loading placeholder */
+        .profile-image-container::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            z-index: 1;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
 
-/* Loading placeholder */
-.profile-image-container::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, #667eea, #764ba2);
-    z-index: 1;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
+        .profile-image-container.loaded::before {
+            opacity: 0;
+        }
 
-.profile-image-container.loaded::before {
-    opacity: 0;
-}
- .play-button {
+        .play-button {
             position: fixed;
             top: 20px;
             right: 20px;
@@ -454,6 +437,12 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            background: #ff5252;
         }
 
         .play-icon {
@@ -463,6 +452,23 @@
             border-top: 12px solid transparent;
             border-bottom: 12px solid transparent;
             margin-left: 3px;
+        }
+
+        .pause-icon {
+            width: 4px;
+            height: 20px;
+            background: white;
+            position: relative;
+        }
+
+        .pause-icon::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 0;
+            width: 4px;
+            height: 20px;
+            background: white;
         }
     </style>
 </head>
@@ -509,9 +515,11 @@
         <button id="play-pause"></button>
         <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
     </div>
-  <button class="play-button" onclick="playAudio()">
-        <div class="play-icon"></div>
+
+    <button class="play-button" id="audio-play-button">
+        <div class="play-icon" id="play-icon"></div>
     </button>
+
     <audio id="birthday-song" class="audio" loop autoplay>
         <source src="initial.mp3" type="audio/mp3">
         Your browser does not support the audio element.
@@ -519,23 +527,21 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script>
-         function playAudio() {
-            const audio = document.getElementsByClassName('audio');
-            audio.play();
-        }
         // Initialize audio
         const audio = document.getElementById('birthday-song');
         const playPauseBtn = document.getElementById('play-pause');
         const volumeControl = document.getElementById('volume');
         const celebrateButton = document.getElementById('celebrate-button');
         const profileImg = document.getElementById('profile-img');
+        const audioPlayButton = document.getElementById('audio-play-button');
+        const playIcon = document.getElementById('play-icon');
         let isPlaying = false;
 
         // Set initial volume
         audio.volume = volumeControl.value;
 
-        // Play/Pause button
-        playPauseBtn.addEventListener('click', () => {
+        // Play/Pause button functionality - ONLY for the audio play button
+        audioPlayButton.addEventListener('click', () => {
             toggleAudio();
         });
 
@@ -548,12 +554,14 @@
         function toggleAudio() {
             if (isPlaying) {
                 audio.pause();
-                playPauseBtn.textContent = '▶️';
+                playIcon.className = 'play-icon';
+                playIcon.innerHTML = '';
                 isPlaying = false;
             } else {
                 audio.play()
                     .then(() => {
-                        playPauseBtn.textContent = '⏸️';
+                        playIcon.className = 'pause-icon';
+                        playIcon.innerHTML = '';
                         isPlaying = true;
                     })
                     .catch(error => {
@@ -562,27 +570,12 @@
             }
         }
 
-        // Function to go to next page
+        // Function to go to next page - ONLY for the celebrate button
         function goToNextPage() {
-            if (!isPlaying) {
-                audio.play()
-                    .then(() => {
-                        playPauseBtn.textContent = '⏸️';
-                        isPlaying = true;
-                        setTimeout(() => {
-                            window.location.href = "memorylane.html";
-                        }, 500);
-                    })
-                    .catch(error => {
-                        console.log("Audio play failed:", error);
-                        window.location.href = "memorylane.html";
-                    });
-            } else {
-                window.location.href = "memorylane.html";
-            }
+            window.location.href = "memorylane.html";
         }
 
-        // Add click event to the celebrate button
+        // Add click event to the celebrate button - NO AUDIO CONTROL
         celebrateButton.addEventListener('click', goToNextPage);
 
         // Create floating hearts around profile image
@@ -726,27 +719,28 @@
                 });
             }
         }
+
         document.addEventListener('DOMContentLoaded', function() {
-    const profileImg = document.getElementById('profile-img');
-    const container = document.querySelector('.profile-image-container');
-    
-    // Preload the image
-    const preloadImg = new Image();
-    preloadImg.onload = function() {
-        profileImg.src = this.src;
-        profileImg.style.opacity = '1';
-        container.classList.add('loaded');
-    };
-    preloadImg.src = 'pic.jpg';
-    
-    // Fallback timeout
-    setTimeout(() => {
-        if (profileImg.style.opacity !== '1') {
-            profileImg.style.opacity = '1';
-            container.classList.add('loaded');
-        }
-    }, 2000);
-});
+            const profileImg = document.getElementById('profile-img');
+            const container = document.querySelector('.profile-image-container');
+            
+            // Preload the image
+            const preloadImg = new Image();
+            preloadImg.onload = function() {
+                profileImg.src = this.src;
+                profileImg.style.opacity = '1';
+                container.classList.add('loaded');
+            };
+            preloadImg.src = 'pic.jpg';
+            
+            // Fallback timeout
+            setTimeout(() => {
+                if (profileImg.style.opacity !== '1') {
+                    profileImg.style.opacity = '1';
+                    container.classList.add('loaded');
+                }
+            }, 2000);
+        });
 
     </script>
 </body>
