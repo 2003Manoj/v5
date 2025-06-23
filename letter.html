@@ -1458,6 +1458,24 @@ video {
                 }
             }
         });
+        const audio = document.getElementById('birthday-song');
+let hasInteracted = false;
+
+// Listen for any user interaction
+document.addEventListener('click', function() {
+    if (!hasInteracted) {
+        audio.play();
+        hasInteracted = true;
+    }
+}, { once: true });
+
+// Also try on touch for mobile
+document.addEventListener('touchstart', function() {
+    if (!hasInteracted) {
+        audio.play();
+        hasInteracted = true;
+    }
+}, { once: true });
     </script>
 </body>
 </html>
