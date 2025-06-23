@@ -223,14 +223,15 @@
             background: rgba(255, 255, 255, 0.1);
             padding: 10px;
             border-radius: 20px;
-            display: flex;
+            display: none;
             align-items: center;
             gap: 10px;
             backdrop-filter: blur(10px);
         }
-
+        
         .audio-controls button {
             background: none;
+            display: hidden;
             border: none;
             font-size: 1.5em;
             cursor: pointer;
@@ -240,10 +241,13 @@
         }
 
         .audio-controls button:hover {
+             display: hidden;
             background: rgba(255, 255, 255, 0.2);
+            
         }
 
         .audio-controls input {
+             display: hidden;
             width: 80px;
         }
 
@@ -364,6 +368,7 @@
             .audio-controls {
                 bottom: 10px;
                 right: 10px;
+                 display: hidden;
                 padding: 8px;
                 scale: 0.9;
             }
@@ -435,6 +440,30 @@
 .profile-image-container.loaded::before {
     opacity: 0;
 }
+ .play-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 18px solid white;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 3px;
+        }
     </style>
 </head>
 <body>
@@ -477,10 +506,12 @@
     </div>
 
     <div class="audio-controls">
-        <button id="play-pause">▶️</button>
+        <button id="play-pause"></button>
         <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
     </div>
-
+  <button class="play-button" onclick="playAudio()">
+        <div class="play-icon"></div>
+    </button>
     <audio id="birthday-song" loop autoplay>
         <source src="hbd.mp3" type="audio/mp3">
         Your browser does not support the audio element.

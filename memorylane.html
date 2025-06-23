@@ -514,6 +514,30 @@
           U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
           U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
+       .play-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 18px solid white;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 3px;
+        }
     </style>
   </head>
   <body
@@ -523,8 +547,10 @@
     data-new-gr-c-s-check-loaded="14.1235.0"
     data-gr-ext-installed=""
   >
-
-    <audio id="birthday-song" loop autoplay>
+ <button class="play-button" onclick="playAudio()">
+        <div class="play-icon"></div>
+    </button>
+    <audio id="audio" loop autoplay>
         <source src="hbd.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
@@ -2681,6 +2707,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 
     <script>
+      function playAudio() {
+            const audio = document.getElementById('audio');
+            audio.play();
+        }
       // Register ScrollTrigger plugin
       gsap.registerPlugin(ScrollTrigger);
 
