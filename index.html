@@ -512,13 +512,17 @@
   <button class="play-button" onclick="playAudio()">
         <div class="play-icon"></div>
     </button>
-    <audio id="birthday-song audio" loop autoplay>
-        <source src="hbd.mp3" type="audio/mp3">
+    <audio id="birthday-song" class="audio" loop autoplay>
+        <source src="initial.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script>
+         function playAudio() {
+            const audio = document.getElementsByClassName('audio');
+            audio.play();
+        }
         // Initialize audio
         const audio = document.getElementById('birthday-song');
         const playPauseBtn = document.getElementById('play-pause');
